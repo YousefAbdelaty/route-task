@@ -1,0 +1,32 @@
+.issueListWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.issueListWrapper .search{
+    margin-bottom: 2rem;
+    width: 40vw;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.issueListWrapper ul li{
+    list-style: none;
+    border: 1px solid #333;
+    border-radius: 5px;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.issueListWrapper ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+.issueListWrapper ul li:hover{
+    transform: scale(1.05);
+}

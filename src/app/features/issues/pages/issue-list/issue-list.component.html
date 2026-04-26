@@ -1,0 +1,9 @@
+<div class="issueListWrapper ">
+    <input type="search" [(ngModel)]="search" placeholder="Search..." class="search">
+    <ul class="row gap-5">
+        <li (click)="postNavigate(post.id)" *ngFor="let post of posts |slice:0:50; let i = index " class="col-3 ">
+            <a>{{post.title}}</a>
+        </li>
+
+    </ul>
+</div>

@@ -7,7 +7,7 @@ body{
   background: #222;
   padding: 15px;
   margin-bottom: 2rem;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .navbar a{

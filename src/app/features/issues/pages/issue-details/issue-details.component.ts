@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IssuesService } from '../../../../core/issues.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -12,9 +12,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './issue-details.component.css'
 })
 export class IssueDetailsComponent {
-  constructor(private issueService:IssuesService , private route:ActivatedRoute){}
+  constructor(private issueService:IssuesService , private route:ActivatedRoute , private router:Router){}
   post:any;
   comments:any[]=[];
+
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
       const id = Number (params.get('id'));
@@ -27,6 +28,10 @@ export class IssueDetailsComponent {
         });
       }
     });
+  }
+
+  postsListNavigate(){
+    this.router.navigate(['/issues']);
   }
 
 }

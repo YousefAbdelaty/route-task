@@ -1,7 +1,10 @@
 <nav class="navbar">
-    <div class="container">
-        <a [routerLink]="'/issues'">Posts</a>
-        <a [routerLink]="'/issues/new'">Create post</a>
+    <div class="container nav-container">
+        <a class="brand" [routerLink]="'/issues'">🗂 IssueTracker</a>
+        <div class="nav-links">
+            <a [routerLink]="'/issues'" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Issues</a>
+            <a [routerLink]="'/issues/new'" routerLinkActive="active">New Issue</a>
+        </div>
     </div>
 </nav>
 <div class="container">

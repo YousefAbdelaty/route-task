@@ -24,7 +24,7 @@ export class IssuesService {
   }
 
   createPost(data:any){
-    return this.http.post(`{this.url}/posts`,data);
+    return this.http.post(`${this.url}/posts`,data);
   }
 
 }

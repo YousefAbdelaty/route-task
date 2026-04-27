@@ -1,32 +1,123 @@
-.issueListWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.issueListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+  min-height: 80vh;
 }
 
-.issueListWrapper .search{
-    margin-bottom: 2rem;
-    width: 40vw;
-    padding: 10px;
-    border-radius: 5px;
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
 }
 
-.issueListWrapper ul li{
-    list-style: none;
-    border: 1px solid #333;
-    border-radius: 5px;
-    width: 200px;
-    height: 200px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
+.issueListWrapper .search {
+  margin-bottom: 2rem;
+  width: 40vw;
+  max-width: 520px;
+  min-width: 260px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #cbd5e1;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #f8fafc;
 }
 
-.issueListWrapper ul li a{
-    text-decoration: none;
-    color: black;
+.issueListWrapper .search:focus {
+  border-color: #6366f1;
+  background: #fff;
 }
 
-.issueListWrapper ul li:hover{
-    transform: scale(1.05);
+.state-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-size: 15px;
+}
+
+.loading-box {
+  color: #64748b;
+}
+
+.error-box {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.issueListWrapper ul {
+  width: 100%;
+  max-width: 1100px;
+  justify-content: center;
+}
+
+.post-card {
+  list-style: none;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
+  border-color: #6366f1;
+}
+
+.post-card a {
+  text-decoration: none;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.post-id {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6366f1;
+  background: #eef2ff;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.no-results {
+  color: #94a3b8;
+  margin-top: 2rem;
+  font-size: 15px;
 }

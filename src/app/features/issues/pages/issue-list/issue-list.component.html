@@ -1,10 +1,26 @@
-<div class="issueListWrapper ">
-    <input type="search" [(ngModel)]="searchTerm" placeholder="Search..." class="search" (ngModelChange)="searching()"
-        (keyup.enter)="searching()" (keyup.escape)="clearSearch()">
-    <ul class="row gap-5">
-        <li (click)="postNavigate(post.id)" *ngFor="let post of posts |slice:0:50; let i = index " class="col-3 ">
-            <a>{{post.title}}</a>
-        </li>
+<div class="issueListWrapper">
+    <h1 class="page-title">Issues</h1>
 
+    <input type="search" [(ngModel)]="searchTerm" placeholder="Search issues..." class="search"
+        (ngModelChange)="searching()" (keyup.enter)="searching()" (keyup.escape)="clearSearch()">
+
+    <div class="state-box loading-box" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Loading issues...</p>
+    </div>
+
+    <div class="state-box error-box" *ngIf="errorMsg">
+        <p>⚠️ {{ errorMsg }}</p>
+    </div>
+
+    <ul class="row gap-4" *ngIf="!isLoading && !errorMsg">
+        <li (click)="postNavigate(post.id)" *ngFor="let post of posts" class="col-3 post-card">
+            <span class="post-id">#{{ post.id }}</span>
+            <a>{{ post.title }}</a>
+        </li>
     </ul>
+
+    <p class="no-results" *ngIf="!isLoading && !errorMsg && posts.length === 0">
+        No issues match your search.
+    </p>
 </div>

@@ -1,17 +1,33 @@
 <div class="issueDetailsWrapper">
 
-    <button (click)="postsListNavigate()">Back to posts list</button>
-    <div class="postWrapper">
-        <p class="title">{{post.title}}</p>
-        <p class="body">{{post.body}}</p>
-        <div class="comments">
+    <button class="back-btn" (click)="postsListNavigate()">
+        ← Back to issues
+    </button>
+
+    <div class="state-box loading-box" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Loading issue...</p>
+    </div>
+
+    <div class="error-box" *ngIf="errorMsg">
+        <p>⚠️ {{ errorMsg }}</p>
+    </div>
+
+    <div class="postWrapper" *ngIf="!isLoading && post">
+        <span class="issue-id">#{{ post.id }}</span>
+        <p class="title">{{ post.title }}</p>
+        <p class="body">{{ post.body }}</p>
+
+        <div class="comments" *ngIf="comments.length > 0">
+            <h3 class="comments-heading">Comments ({{ comments.length }})</h3>
             <ul>
                 <li *ngFor="let comment of comments">
-                    <p class="commentName">Name : {{comment.name}}</p>
-                    <p class="commentEmail">Email : {{comment.email}}</p>
-                    <p class="commentBody">Body : {{comment.body}}</p>
+                    <p class="commentName">{{ comment.name }}</p>
+                    <p class="commentEmail">{{ comment.email }}</p>
+                    <p class="commentBody">{{ comment.body }}</p>
                 </li>
             </ul>
         </div>
     </div>
+
 </div>

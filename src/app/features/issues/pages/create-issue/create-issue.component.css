@@ -1,0 +1,131 @@
+.formWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.formWrapper form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  gap: 1.25rem;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.success-msg {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+}
+
+.error-msg {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #be123c;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formWrapper form input,
+.formWrapper form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  background: #f8fafc;
+  resize: vertical;
+}
+
+.formWrapper form input:focus,
+.formWrapper form textarea:focus {
+  border-color: #6366f1;
+  background: #fff;
+}
+
+.validation-msg {
+  color: #dc2626;
+  font-size: 12px;
+}
+
+.spinner-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: #6366f1;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 0;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid #e2e8f0;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.formWrapper form button {
+  padding: 12px;
+  border: none;
+  background-color: #6366f1;
+  color: white;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.25rem;
+}
+
+.formWrapper form button:hover:not(:disabled) {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.formWrapper form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

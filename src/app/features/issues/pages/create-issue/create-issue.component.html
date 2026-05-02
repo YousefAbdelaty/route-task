@@ -2,33 +2,38 @@
     <form [formGroup]="postForm" (submit)="formSubmit()">
         <h2 class="form-title">Create New Issue</h2>
 
-        <div class="msg success-msg" *ngIf="successMsg">{{ successMsg }}</div>
-        <div class="msg error-msg" *ngIf="errorMsg">⚠️ {{ errorMsg }}</div>
+        @if (successMsg) {
+        <div class="msg success-msg">{{ successMsg }}</div>
+        }
+        @if (errorMsg) {
+        <div class="msg error-msg">⚠️ {{ errorMsg }}</div>
+        }
 
         <div class="field">
             <label>Title</label>
             <input type="text" placeholder="Issue title..." formControlName="title">
-            <span class="validation-msg" *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched">
-                Title is required (min 3 characters).
-            </span>
+            @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
+            <span class="validation-msg">Title is required (min 3 characters).</span>
+            }
         </div>
 
         <div class="field">
             <label>Body</label>
             <textarea placeholder="Describe the issue..." rows="5" formControlName="body"></textarea>
-            <span class="validation-msg" *ngIf="postForm.get('body')?.invalid && postForm.get('body')?.touched">
-                Body is required.
-            </span>
+            @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
+            <span class="validation-msg">Body is required.</span>
+            }
         </div>
 
-
-        <div class="spinner-wrap" *ngIf="isLoading">
+        @if (isLoading) {
+        <div class="spinner-wrap">
             <div class="spinner"></div>
             <span>Posting...</span>
         </div>
+        }
 
-        <button type="submit" *ngIf="!isLoading" [disabled]="postForm.invalid">
-            Post Issue
-        </button>
+        @if (!isLoading) {
+        <button type="submit" [disabled]="postForm.invalid">Post Issue</button>
+        }
     </form>
 </div>

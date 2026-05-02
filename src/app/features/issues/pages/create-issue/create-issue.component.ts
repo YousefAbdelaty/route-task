@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { IssuesService } from '../../../../core/issues.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CreatePostPayload } from '../../../../core/issue.models';
 
 @Component({
   selector: 'app-create-issue',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './create-issue.component.html',
   styleUrl: './create-issue.component.css'
 })
 export class CreateIssueComponent {
 
+  private destroyRef = inject(DestroyRef);  
+
   postForm!: FormGroup;
   successMsg = '';
   errorMsg = '';
-  isLoading = false; 
+  isLoading = false;
 
   constructor(
     public form: FormBuilder,
@@ -33,18 +36,20 @@ export class CreateIssueComponent {
     if (this.postForm.valid) {
       this.errorMsg = '';
       this.successMsg = '';
-      this.isLoading = true;  
-      this.issueService.createPost(this.postForm.value).subscribe({
-        next: (res) => {
-          this.isLoading = false;  
+      this.isLoading = true;
+      this.issueService.createPost(this.postForm.value as CreatePostPayload).pipe(
+        takeUntilDestroyed(this.destroyRef)  
+      ).subscribe({
+        next: () => {
+          this.isLoading = false;
           this.successMsg = '✅ Issue created successfully! Redirecting...';
           setTimeout(() => {
             this.router.navigate(['/issues']);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }, 1500);
         },
-        error: (err) => {
-          this.isLoading = false;  
+        error: () => {
+          this.isLoading = false;
           this.errorMsg = 'Something went wrong. Please try again.';
         }
       });

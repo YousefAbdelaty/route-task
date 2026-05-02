@@ -1,35 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IssuesService } from '../../../../core/issues.service';
-import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from "@angular/router";
 import { FormsModule } from '@angular/forms';
+import { Post } from '../../../../core/issue.models';
 
 @Component({
   selector: 'app-issue-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './issue-list.component.html',
   styleUrl: './issue-list.component.css'
 })
-export class IssueListComponent {
+export class IssueListComponent implements OnInit {
+
+  private destroyRef = inject(DestroyRef); 
 
   constructor(private issueService: IssuesService, private router: Router) {}
 
-  posts: any[] = [];
-  allPosts: any[] = [];
+  posts: Post[] = [];
+  allPosts: Post[] = [];
   searchTerm = '';
-  isLoading = true;       
-  errorMsg = '';          
+  isLoading = true;
+  errorMsg = '';
 
   ngOnInit() {
-    this.isLoading = true;
-    this.issueService.getAllPosts().subscribe({
+    this.issueService.getAllPosts().pipe(
+      takeUntilDestroyed(this.destroyRef)   
+    ).subscribe({
       next: (data) => {
         this.posts = data.slice(0, 50);
         this.allPosts = data.slice(0, 50);
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         this.errorMsg = 'Failed to load issues. Please try again.';
         this.isLoading = false;
       }

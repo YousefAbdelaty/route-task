@@ -4,23 +4,31 @@
     <input type="search" [(ngModel)]="searchTerm" placeholder="Search issues..." class="search"
         (ngModelChange)="searching()" (keyup.enter)="searching()" (keyup.escape)="clearSearch()">
 
-    <div class="state-box loading-box" *ngIf="isLoading">
+    @if (isLoading) {
+    <div class="state-box loading-box">
         <div class="spinner"></div>
         <p>Loading issues...</p>
     </div>
+    }
 
-    <div class="state-box error-box" *ngIf="errorMsg">
+    @if (errorMsg) {
+    <div class="state-box error-box">
         <p>⚠️ {{ errorMsg }}</p>
     </div>
+    }
 
-    <ul class="row gap-4" *ngIf="!isLoading && !errorMsg">
-        <li (click)="postNavigate(post.id)" *ngFor="let post of posts" class="col-3 post-card">
+    @if (!isLoading && !errorMsg) {
+    <ul class="row gap-4">
+        @for (post of posts; track post.id) {
+        <li (click)="postNavigate(post.id)" class="col-3 post-card">
             <span class="post-id">#{{ post.id }}</span>
             <a>{{ post.title }}</a>
         </li>
+        }
     </ul>
+    }
 
-    <p class="no-results" *ngIf="!isLoading && !errorMsg && posts.length === 0">
-        No issues match your search.
-    </p>
+    @if (!isLoading && !errorMsg && posts.length === 0) {
+    <p class="no-results">No issues match your search.</p>
+    }
 </div>

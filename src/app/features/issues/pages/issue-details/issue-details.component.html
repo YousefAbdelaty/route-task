@@ -4,30 +4,40 @@
         ← Back to issues
     </button>
 
-    <div class="state-box loading-box" *ngIf="isLoading">
+    @if (isLoading) {
+    <div class="state-box loading-box">
         <div class="spinner"></div>
         <p>Loading issue...</p>
     </div>
+    }
 
-    <div class="error-box" *ngIf="errorMsg">
+    @if (errorMsg) {
+    <div class="error-box">
         <p>⚠️ {{ errorMsg }}</p>
     </div>
+    }
 
-    <div class="postWrapper" *ngIf="!isLoading && post">
+    @if (!isLoading && post) {
+    <div class="postWrapper">
         <span class="issue-id">#{{ post.id }}</span>
         <p class="title">{{ post.title }}</p>
         <p class="body">{{ post.body }}</p>
 
-        <div class="comments" *ngIf="comments.length > 0">
+        @if (comments.length > 0) {
+        <div class="comments">
             <h3 class="comments-heading">Comments ({{ comments.length }})</h3>
             <ul>
-                <li *ngFor="let comment of comments">
+                @for (comment of comments; track comment.id) {
+                <li>
                     <p class="commentName">{{ comment.name }}</p>
                     <p class="commentEmail">{{ comment.email }}</p>
                     <p class="commentBody">{{ comment.body }}</p>
                 </li>
+                }
             </ul>
         </div>
+        }
     </div>
+    }
 
 </div>
